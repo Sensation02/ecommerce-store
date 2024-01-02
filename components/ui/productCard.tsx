@@ -1,21 +1,35 @@
 'use client'
 
 import { Product } from '@/types'
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import Image from 'next/image'
 import IconButton from './iconButton'
 import { Expand, ShoppingCart } from 'lucide-react'
 import Currency from './currency'
 import { useRouter } from 'next/navigation'
+import usePreviewModel from '@/hooks/usePreviewModel'
+import useCart from '@/hooks/useCart'
 
 interface Props {
   data: Product
 }
 
 const ProductCard: React.FC<Props> = ({ data }) => {
+  const previewModal = usePreviewModel()
+  const cart = useCart()
   const router = useRouter()
   const handleClick = () => {
     router.push(`/product/${data?.id}`)
+  }
+
+  const onPreview = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation() // Prevents the click event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event. (click event on the card)
+    previewModal.onOpen(data)
+  }
+
+  const onAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    cart.addItem(data)
   }
 
   return (
@@ -34,11 +48,11 @@ const ProductCard: React.FC<Props> = ({ data }) => {
         <div className=' opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5'>
           <div className='flex gap-x-6 justify-center'>
             <IconButton
-              onClick={() => alert('Added to cart')}
+              onClick={onPreview}
               icon={<Expand size={20} className='text-gray-600' />}
             />
             <IconButton
-              onClick={() => alert('Added to cart')}
+              onClick={onAddToCart}
               icon={<ShoppingCart size={20} className='text-gray-600' />}
             />
           </div>

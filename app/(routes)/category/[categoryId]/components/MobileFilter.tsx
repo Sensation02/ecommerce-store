@@ -12,7 +12,7 @@ interface Props {
   colors: Color[]
 }
 
-const MobileFilter: React.FC<Props> = async ({ sizes, colors }) => {
+const MobileFilter: React.FC<Props> = ({ sizes, colors }) => {
   const [open, setOpen] = useState(false)
 
   const onOpen = () => setOpen(true)
@@ -38,7 +38,7 @@ const MobileFilter: React.FC<Props> = async ({ sizes, colors }) => {
             <Dialog.Panel className='relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl'>
               {/* close */}
               <div className=' flex items-center justify-end px-4'>
-                <IconButton icon={<X size={15} onClick={onClose} />} />
+                <IconButton icon={<X size={15} />} onClick={onClose} />
               </div>
               <div className='p-4'>
                 <Filter valueKey='sizeId' name='Sizes' data={sizes} />

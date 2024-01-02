@@ -1,6 +1,6 @@
 'use client'
 
-import { useIsMounted } from '@/lib/useIsMounted'
+import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatter } from '@/lib/utils'
 import React from 'react'
 

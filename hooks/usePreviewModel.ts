@@ -22,4 +22,7 @@ const usePreviewModel = create<PreviewModelStore>((set) => ({
   onClose: () => set({ isOpen: false, data: undefined }),
 }))
 
+// this hook is used to open and close the model and also to get the data of the product
+// so when we click on the product we will open the model and pass the data of the product to the model to preview it and when we click on the close button we will close the model. In this process we will pass the data to show it and when we close the model we will remove the data from the store.
+
 export default usePreviewModel
